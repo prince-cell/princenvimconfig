@@ -171,9 +171,15 @@ vim.opt.scrolloff = 10
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
+<<<<<<< HEAD
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
+=======
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+>>>>>>> 4e07d05 (neovim updated)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
@@ -187,6 +193,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+<<<<<<< HEAD
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
@@ -195,6 +202,8 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
+=======
+>>>>>>> 4e07d05 (neovim updated)
 --
 --  See `:help wincmd` for a list of all window commands
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
@@ -228,6 +237,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 --
+<<<<<<< HEAD
 --  To check the current status of your plugins, run
 --    :Lazy
 --
@@ -235,6 +245,15 @@ vim.opt.rtp:prepend(lazypath)
 --
 --  To update plugins you can run
 --    :Lazy update
+=======
+-- To check the current status of your plugins, run
+--   :Lazy
+--
+-- You can press `?` in this menu for help. Use `:q` to close the window
+--
+-- To update plugins you can run
+--   :Lazy update
+>>>>>>> 4e07d05 (neovim updated)
 --
 
 -- here you can setup the language servers
@@ -250,6 +269,7 @@ require('lazy').setup({
   --
   -- Use `opts = {}` to force a plugin to be loaded.
   --
+<<<<<<< HEAD
   --  This is equivalent to:
   --    require('Comment').setup({})
 
@@ -259,6 +279,17 @@ require('lazy').setup({
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
   --    require('gitsigns').setup({ ... })
+=======
+  --   This is equivalent to:
+  --     require('Comment').setup({})
+
+  -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim',      opts = {} },
+
+  -- Here is a more advanced example where we pass configuration
+  -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
+  --     require('gitsigns').setup({ ... })
+>>>>>>> 4e07d05 (neovim updated)
   --
   -- See `:help gitsigns` to understand what the configuration keys do
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -280,8 +311,13 @@ require('lazy').setup({
   -- lazy loading plugins that don't need to be loaded immediately at startup.
   --
   -- For example, in the following configuration, we use:
+<<<<<<< HEAD
   --  event = 'VimEnter'
   --  config = function() ... end
+=======
+  --   event = 'VimEnter'
+  --   config = function() ... end
+>>>>>>> 4e07d05 (neovim updated)
 
 
   -- NOTE: Plugins can specify dependencies.
@@ -311,9 +347,84 @@ require('lazy').setup({
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
+<<<<<<< HEAD
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+=======
+      -- lua/plugins/colorschemes.lua (or directly in your init.lua)
+      {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        lazy = false,
+        priority = 1000, -- Make sure it loads early
+        config = function()
+          require("rose-pine").setup({
+            -- Configure Rose Pine options here
+            -- These are the key settings for transparency
+            styles = {
+              -- Other styles like bold, italic can be configured here
+              transparency = false,
+              italic = false
+            },
+            -- Optional: Choose a variant (main, moon, dawn)
+            -- 'main' is the default dark variant
+            -- 'moon' is a slightly more muted dark variant
+            -- 'dawn' is the light variant
+            variant = "moon", -- or "moon"
+            -- dark_variant = "moon", -- If you use 'auto' variant and want a specific dark sub-variant
+
+            -- Disable background for specific elements if needed
+            disable_background = true,
+            disable_float_background = true,
+          })
+
+          -- Set the colorscheme
+          vim.cmd.colorscheme "rose-pine"
+        end,
+      },
+
+      {
+        "stevearc/conform.nvim",
+        opts = {
+          -- Auto-format on save
+          format_on_save = {
+            timeout_ms = 50000,
+            lsp_format = "fallback", -- Use LSP formatting if no other formatter is configured
+          },
+          -- Configure formatters for specific filetypes
+          formatters_by_ft = {
+            -- F# configuration
+            fsharp = { "fantomas" },
+
+            -- Elm configuration
+            elm = { "elm-format" },
+
+            -- Your existing configurations (e.g., Lua, Python, JS)
+            lua = { "stylua" },
+            python = { "isort", "black" },
+            javascript = { "prettierd", "prettier" },
+            typescript = { "prettierd", "prettier" },
+            json = { "prettierd", "prettier" },
+            markdown = { "prettierd", "prettier" },
+            css = { "prettierd", "prettier" },
+            html = { "prettierd", "prettier" },
+            -- Add more languages as needed
+          },
+          -- Optional: Configure formatters globally if they need specific arguments
+          -- For Fantomas, you might want to specify options via an .editorconfig file in your F# project.
+          -- For elm-format, it's opinionated and has no configuration options by design.
+          --[[ formatters = {
+            fantomas = {
+              --     -- You can pass arguments if needed, but it's often better to use .editorconfig for Fantomas
+              args = { "--check", "." },
+            },
+          }, ]]
+        },
+      },
+      -- Useful for getting pretty icons, but requires a Nerd Font.
+      { 'nvim-tree/nvim-web-devicons', },
+>>>>>>> 4e07d05 (neovim updated)
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -321,15 +432,24 @@ require('lazy').setup({
       -- many different aspects of Neovim, your workspace, LSP, and more!
       --
       -- The easiest way to use Telescope, is to start by doing something like:
+<<<<<<< HEAD
       --  :Telescope help_tags
+=======
+      --   :Telescope help_tags
+>>>>>>> 4e07d05 (neovim updated)
       --
       -- After running this command, a window will open up and you're able to
       -- type in the prompt window. You'll see a list of `help_tags` options and
       -- a corresponding preview of the help.
       --
       -- Two important keymaps to use while in Telescope are:
+<<<<<<< HEAD
       --  - Insert mode: <c-/>
       --  - Normal mode: ?
+=======
+      --   - Insert mode: <c-/>
+      --   - Normal mode: ?
+>>>>>>> 4e07d05 (neovim updated)
       --
       -- This opens a window that shows you all of the keymaps for the current
       -- Telescope picker. This is really useful to discover what Telescope can
@@ -339,7 +459,11 @@ require('lazy').setup({
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
+<<<<<<< HEAD
         --  All the info you're looking for is in `:help telescope.setup()`
+=======
+        --   All the info you're looking for is in `:help telescope.setup()`
+>>>>>>> 4e07d05 (neovim updated)
         --
         -- defaults = {
         --   mappings = {
@@ -381,7 +505,11 @@ require('lazy').setup({
       end, { desc = '[/] Fuzzily search in current buffer' })
 
       -- It's also possible to pass additional configuration options.
+<<<<<<< HEAD
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
+=======
+      --   See `:help telescope.builtin.live_grep()` for information about particular keys
+>>>>>>> 4e07d05 (neovim updated)
       vim.keymap.set('n', '<leader>s/', function()
         builtin.live_grep {
           grep_open_files = true,
@@ -398,6 +526,7 @@ require('lazy').setup({
 
   --lsp configuration
   --- Uncomment the two plugins below if you want to manage the language servers from neovim
+<<<<<<< HEAD
   { 'williamboman/mason.nvim' },
   { 'williamboman/mason-lspconfig.nvim' },
 
@@ -440,6 +569,38 @@ require('lazy').setup({
     -- Optional dependencies
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
+=======
+
+  { 'rescript-lang/vim-rescript', tag = "v2.1.0" },
+
+  {
+    "j-hui/fidget.nvim",
+    tag = "v1.6.1",
+    config = function()
+      require('fidget').setup()
+    end,
+    opt = {
+      display = {
+        render_limit = 12,
+      },
+    },
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    }
+  },
+  opts_extend = { "sources.default" },
+>>>>>>> 4e07d05 (neovim updated)
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -447,9 +608,15 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
+<<<<<<< HEAD
       ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
+=======
+      ensure_installed = {},
+      -- Autoinstall languages that are not installed
+      auto_install = false,
+>>>>>>> 4e07d05 (neovim updated)
       highlight = {
         enable = true,
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
@@ -487,8 +654,13 @@ require('lazy').setup({
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
+<<<<<<< HEAD
   -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+=======
+  require 'kickstart.plugins.autocomplete',
+  require 'kickstart.plugins.neo-tree',
+>>>>>>> 4e07d05 (neovim updated)
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
@@ -496,6 +668,7 @@ require('lazy').setup({
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   -- { import = 'custom.plugins' },
+<<<<<<< HEAD
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
@@ -545,3 +718,32 @@ require('mason-lspconfig').setup({
 })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+=======
+
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons', 'rose-pine/neovim' },
+    config = function()
+      require('lualine').setup({
+        options = {
+          theme = 'rose-pine'
+        }
+      })
+    end,
+  },
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
+    opts = {},
+  },
+  {
+    'folke/which-key.nvim',
+    config = function()
+      require('which-key').setup()
+    end,
+  },
+})
+require("notify").setup({
+  background_colour = "#000000",
+})
+>>>>>>> 4e07d05 (neovim updated)
